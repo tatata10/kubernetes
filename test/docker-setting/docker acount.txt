@@ -1,0 +1,46 @@
+docker acount
+
+user:taichikawai
+password:dockerpassword
+
+docekerimageを変更
+docker build --no-cache -t uwsgi-app:latest .
+
+docker hubにimageを追加。
+
+docker tag uwsgi-app:latest taichikawai/uwsgi-app:v3
+docker push taichikawai/uwsgi-app:v3
+
+
+
+deploymentの削除
+kubectl delete deployment ap-server
+
+デプロイメント
+kubectl apply -f ap-server.yaml
+
+ポッド取得
+kubectl get pods
+
+pod状況の確認
+kubectl describe pod ap-server-648bdbfdf6-dgmw2
+
+
+pod内のlistenするportの確認
+kubectl exec -it web-server-77f96c5897-lssmm -- netstat -tuln
+
+
+webサーバーのポートフォワード
+k port-forward web-server-77f96c5897-lssmm 8080:80
+
+dbサーバーのポートフォワード
+k port-forward postgres-server-f6b5cf9cb-dkk9t 5432:5432
+
+serviceのエンドポイントの確認
+kubectl get endpoints <service-name>
+
+
+
+uwsgiの設定ファイル
+/usr/bin/uwsgi
+
