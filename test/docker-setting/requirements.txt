@@ -1,0 +1,6 @@
+Django==4.2
+psycopg2-binary  # PostgreSQLを使用する場合
+python-decouple  # 環境変数管理用
+flask
+flask-sqlalchemy
+flask-wtf
